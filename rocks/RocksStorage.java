@@ -145,6 +145,7 @@ public abstract class RocksStorage implements Storage {
         try {
             deleteCloseSchemaWriteLock.writeLock().lock();
             if (isOpen.compareAndSet(true, false)) {
+                LOG.info("------- CLOSING " + this + "!!!!!!!");
                 iterators.parallelStream().forEach(RocksIterator::close);
                 recycled.forEach(AbstractImmutableNativeReference::close);
                 snapshot.close();
