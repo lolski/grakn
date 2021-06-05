@@ -160,7 +160,7 @@ public abstract class RocksSession implements TypeDB.Session {
 
         }
 
-        RocksTransaction.Schema initialisationTransaction() {
+        protected RocksTransaction.Schema initialisationTransaction() {
             if (!isOpen.get()) throw TypeDBException.of(SESSION_CLOSED);
             try {
                 if (!writeLock.tryLock(new Options.Transaction().schemaLockTimeoutMillis(), MILLISECONDS)) {
